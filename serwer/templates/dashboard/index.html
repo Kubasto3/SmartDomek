@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <div class="header-left">
+      <h1 class="dashboard-title">Panel monitorowania i zarządzania</h1>
+    </div>
+
+    <div class="header-center">
+      <span id="rtc-clock">--:--:--</span>
+    </div>
+
+    <div class="header-right">
+      <a class="logout-btn" href="{{ url_for('auth.logout') }}">
+        Wyloguj
+      </a>
+    </div>
+  </header>
+
+  <section class="status-grid">
+    {% if last_measurement %}
+      <div class="status-card">
+        <span class="label">Temp. wewnętrzna</span>
+        <span class="value">{{ "%.1f"|format(last_measurement.temp_inside) }} °C</span>
+      </div>
+      <div class="status-card">
+        <span class="label">Temp. zewnętrzna</span>
+        <span class="value">{{ "%.1f"|format(last_measurement.temp_outside) }} °C</span>
+      </div>
+      <div class="status-card">
+        <span class="label">Wilgotność</span>
+        <span class="value">{{ "%.0f"|format(last_measurement.humidity) }} %</span>
+      </div>
+      <div class="status-card">
+        <span class="label">Ciśnienie</span>
+        <span class="value">{{ "%.0f"|format(last_measurement.pressure) }} hPa</span>
+      </div>
+      <div class="status-card">
+        <span class="label">Stan ogrzewania</span>
+        <span class="value {{ 'on' if last_measurement.heater_state else 'off' }}">
+          {{ 'ON' if last_measurement.heater_state else 'OFF' }}
+        </span>
+      </div>
+      <div class="status-card">
+        <span class="label"> Temperatura zadana </span>
+        <span class="value">{{ last_measurement.set_temperature }} °C</span>
+      </div>
+    {% endif %}
+  </section>
+
+  <main class="dashboard-main">
+    <section class="charts-grid">
+      <article class="chart-card">
+        <h3>Temperatura wewnętrzna</h3>
+        <div id="chart-temp-inside" class="chart-container"></div>
+      </article>
+      <article class="chart-card">
+        <h3>Temperatura zewnętrzna</h3>
+        <div id="chart-temp-outside" class="chart-container"></div>
+      </article>
+      <article class="chart-card">
+        <h3>Wilgotność</h3>
+        <div id="chart-humidity" class="chart-container"></div>
+      </article>
+      <article class="chart-card">
+        <h3>Ciśnienie</h3>
+        <div id="chart-pressure" class="chart-container"></div>
+      </article>
+      <article class="chart-card">
+        <h3>Natężenie światła</h3>
+        <div id="chart-light" class="chart-container"></div>
+      </article>
+      <article class="chart-card">
+        <h3>Temperatura zadana</h3>
+        <div id="chart-set-temp" class="chart-container"></div>
+      </article>
+      <article class="chart-card">
+        <h3>Stan ogrzewania</h3>
+        <div id="chart-heater" class="chart-container"></div>
+      </article>
+      
+      <article class="chart-card chart-card--full">
+        <hr>
+        <h3>Wykres zbiorczy dla wybranych zmiennych</h3>
+        <div id="chart-multi" class="chart-container"></div>
+      </article>
+
+    </section>
+  </main>
+</div>
+
+<aside id="history-panel" class="history-panel">
+  <h3>Historia poleceń głosowych</h3>
+  <ul class="history-list">
+    {% for r in request_history %}
+      <li>
+        {{ r.command }}
+        <time>{{ r.created_at }}</time>
+      </li>
+    {% endfor %}
+  </ul>
+</aside>
+
+<button id="history-toggle" class="history-toggle">❮</button>
+
+<script>
+  window.MEASUREMENTS = {{ measurements | tojson }};
+</script>
+{% endblock %}

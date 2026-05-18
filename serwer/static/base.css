@@ -1,0 +1,97 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.flash-container {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    pointer-events: none;
+}
+
+.flash {
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    position: relative;
+    overflow: hidden;
+
+    padding: 14px 18px;
+    border-radius: 10px;
+
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
+
+    background: #ffffff;
+    border: 1px solid transparent;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.12),
+        0 4px 10px rgba(0, 0, 0, 0.08);
+
+    animation: flash-slide-down 0.35s ease-out;
+    pointer-events: auto;
+}
+
+.flash::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    height: 4px;
+    width: 100%;
+
+    background: rgba(70, 227, 255, 0.89);
+
+    animation: flash-progress linear forwards;
+    animation-duration: var(--flash-duration, 5s);
+}
+
+@keyframes flash-progress {
+    from { width: 100%; }
+    to   { width: 0%; }
+}
+
+.flash.error {
+    background: #fee2e2;
+    color: #7f1d1d;
+    border-color: #fecaca;
+}
+
+.flash.success {
+    background: #dcfce7;
+    color: #14532d;
+    border-color: #bbf7d0;
+}
+
+.flash.info {
+    background: #e0f2fe;
+    color: #075985;
+    border-color: #bae6fd;
+}
+
+@keyframes flash-slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

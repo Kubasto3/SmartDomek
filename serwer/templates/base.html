@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+  
+  {% if g.user %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+  {% else %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+  {% endif %}
+</head>
+
+<body class="{% if not g.user %}auth-page{% endif %}">
+  <div class="flash-container">
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="{% if not g.user %}auth-wrapper{% endif %}">
+    {% block content %}{% endblock %}
+  </div>
+
+  {% if not g.user %}
+    <button
+      id="theme-toggle-auth"
+      class="theme-toggle"
+      type="button"
+      aria-label="Zmień motyw">
+      🌞
+    </button>
+  {% endif %}
+
+  <script src="{{ url_for('static', filename='ui.js') }}"></script>
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+  <script src="{{ url_for('static', filename='charts.js') }}"></script>
+</body>
+</html>

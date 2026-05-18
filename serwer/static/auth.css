@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+
+body.auth-page {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.auth-page section.content {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    border-radius: 12px;
+    padding: 32px 36px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    animation: fadeInUp .6s ease-out;
+}
+
+body.auth-page header h1 {
+    margin: 0 0 24px;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+body.auth-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+body.auth-page label {
+    font-size: .9rem;
+    color: #cbd5e1;
+}
+
+body.auth-page input {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255,255,255,.15);
+    color: #ffffff;
+    font-size: .95rem;
+}
+
+body.auth-page input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #38bdf8;
+}
+
+body.auth-page input[type="submit"] {
+    margin-top: 10px;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    color: #0f172a;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+body.auth-page .password-wrapper {
+    position: relative;
+}
+
+body.auth-page .password-wrapper input {
+    width: 100%;
+    padding-right: 44px;
+}
+
+body.auth-page .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #cbd5e1;
+}
+
+body.auth-page .toggle-password:hover {
+    color: #ffffff;
+}
+
+body.auth-page .auth-secondary {
+    margin-top: 18px;
+    text-align: center;
+    font-size: .9rem;
+    color: #cbd5e1;
+}
+
+body.auth-page .register-link {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+body.auth-page .theme-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: rgba(255,255,255,.15);
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #ffffff;
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+body.light.auth-page {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+}
+
+body.light.auth-page section.content {
+    background: #ffffff;
+}
+
+body.light.auth-page header h1 {
+    color: #0f172a;
+}
+
+body.light.auth-page label {
+    color: #334155;
+}
+
+body.light.auth-page input {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+body.light.auth-page input::placeholder {
+    color: #64748b;
+}
+
+body.light.auth-page .auth-secondary {
+    color: #475569;
+}
+
+body.light.auth-page .register-link {
+    color: #0284c7;
+}
+
+body.light.auth-page .toggle-password {
+    color: #334155;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

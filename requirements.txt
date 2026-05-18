@@ -1,0 +1,2 @@
+flask >= 3.1.2
+highcharts-stock >= 1.7.0

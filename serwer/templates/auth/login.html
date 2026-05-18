@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Logowanie{% endblock %}
+
+{% block content %}
+<section class="content">
+  <header>
+    <h1>Logowanie</h1>
+  </header>
+
+  <form method="post">
+    <label for="username">Nazwa użytkownika</label>
+    <input type="text" name="username" id="username" required>
+
+    <label for="password">Hasło</label>
+    <div class="password-wrapper">
+      <input type="password" name="password" id="password" required>
+      <button type="button" class="toggle-password">👁</button>
+    </div>
+
+    <input type="submit" value="Zaloguj">
+  </form>
+
+  <div class="auth-secondary">
+    <span>Nie masz konta?</span>
+    
+      Zarejestruj się
+    </a>
+  </div>
+</section>
+{% endblock %}
